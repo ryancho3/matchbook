@@ -25,7 +25,10 @@ SECRET_KEY = '4hij$zj6$efz#3b*wkt0kpp#4^@&uuoo_7y4p2(u^nx&7pu-2l'
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = ['matchbook.ap-northeast-2.elasticbeanstalk.com']
+ALLOWED_HOSTS = [
+    'matchbook.ap-northeast-2.elasticbeanstalk.com',
+    '127.0.0.1',
+    ]
 
 
 # Application definition
@@ -72,12 +75,18 @@ WSGI_APPLICATION = 'matchbook.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': os.environ['RDS_DB_NAME'],
+            'USER': os.environ['RDS_USERNAME'],
+            'PASSWORD': os.environ['RDS_PASSWORD'],
+            'HOST': os.environ['RDS_HOSTNAME'],
+            'PORT': os.environ['RDS_PORT'],
+        }
+    }
 
-#DATABASES = {
-#        'ENGINE': 'django.db.backends.sqlite3',
-#        'NAME': os.path.join(BASE_DIR, 'db.sqlite3'),
-#    }
-#}
 
 
 # Password validation
