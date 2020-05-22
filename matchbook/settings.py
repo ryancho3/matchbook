@@ -28,6 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'matchbook.ap-northeast-2.elasticbeanstalk.com',
     '127.0.0.1',
+    '%HOMEPATH%\eb-virt\Scripts\activate'
     ]
 
 
@@ -75,8 +76,8 @@ WSGI_APPLICATION = 'matchbook.wsgi.application'
 
 # Database
 # https://docs.djangoproject.com/en/3.0/ref/settings/#databases
-
-DATABASES = {
+if 'RDS_HOSTNAME' in os.environ:
+    DATABASES = {
         'default': {
             'ENGINE': 'django.db.backends.mysql',
             'NAME': os.environ['RDS_DB_NAME'],
@@ -85,6 +86,7 @@ DATABASES = {
             'HOST': os.environ['RDS_HOSTNAME'],
             'PORT': os.environ['RDS_PORT'],
         }
+
     }
 
 
