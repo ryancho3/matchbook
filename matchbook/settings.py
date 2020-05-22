@@ -28,7 +28,7 @@ DEBUG = True
 ALLOWED_HOSTS = [
     'matchbook.ap-northeast-2.elasticbeanstalk.com',
     '127.0.0.1',
-    '%HOMEPATH%\eb-virt\Scripts\activate'
+    'matchbook-dev.ap-northeast-2.elasticbeanstalk.com'
     ]
 
 
